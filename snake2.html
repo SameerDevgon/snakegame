@@ -1,0 +1,105 @@
+<html>
+<head>
+<style>
+ #mycan {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+#score{
+position: absolute;
+        top: 10%;
+        left: 10%;
+        transform: translate(-40%, -40%);
+      }
+
+
+</style>
+<body>
+<div id="score">0</div>
+<canvas id="mycan" width="300" height="300"/>
+
+<script>
+var cobj= document.getElementById("mycan");
+var ctx= cobj.getContext("2d");
+ctx.fillStyle='white';
+ctx.strokeStyle='black';
+ctx.fillRect(0,0,300,300);
+ctx.strokeRect(0,0,300,300);
+
+
+let snake=[{x:110,y:150},
+{x:120,y:150},
+{x:130,y:150},
+{x:140,y:150}]
+
+document.addEventListener("keydown", changeDirection);
+
+var dx=0;
+setInterval(function ontick(){
+clearCanvas();
+drawSnake();
+moveSnake();
+
+
+
+},100)
+
+function clearCanvas(){
+
+ctx.fillStyle='white';
+ctx.strokeStyle='black';
+ctx.fillRect(0,0,300,300);
+ctx.strokeRect(0,0,300,300);
+
+}
+
+function drawSnake(){
+
+for(var i=0;i<4;i++){
+ctx.fillStyle="green";
+ctx.fillRect(snake[i].x,150,10,10);
+ctx.strokeStyle='darkgreen';
+ctx.strokeRect(snake[i].x,150,10,10);
+
+}
+
+function changeDirection(event)
+{
+   const LEFT_KEY = 37;
+      const RIGHT_KEY = 39;
+      const UP_KEY = 38;
+      const DOWN_KEY = 40;
+
+var kp=event.keyCode;
+
+if(kp==37 & !goingRight){
+dx=-10;
+goingLeft=true;
+goingRight=goingDown=goingUp=false;
+}
+if(kp==39 & !goingLeft){
+dx=+10;
+goingRight=true;
+goingLeft=goingDown=goingUp=false;
+}
+if(kp==38 & !goingDown){
+dy=+10;
+goingUp=true;
+goingRight=goingDown=goingLeft=false;
+}
+if(kp==40 & !goingUp){
+dy=-10;
+goingDown=true;
+goingRight=goingDown=goingLeft=false;
+}
+
+
+}
+
+
+
+</script>
+</body>
+</html>
